@@ -1,25 +1,15 @@
 workflows:
-  android-build:
+  android-workflow:
     name: Android APK Build
-    max_build_duration: 60
     environment:
-      vars:
-        EXPO_TOKEN: "Encrypted: your_encrypted_expo_token"
-      node: latest
-      flutter: stable
-      cocoapods: default
-      ruby: default
+      groups:
+        - default
     scripts:
-      - name: Install Dependencies
+      - name: Install dependencies
         script: |
-          npm install
-          npm install -g expo-cli
-      - name: Prebuild Android
-        script: |
-          expo prebuild --platform android
+          yarn install
       - name: Build APK
         script: |
-          eas build --platform android --profile production
+          expo export --platform android
     artifacts:
-      - build/android/*.apk
-
+      - build/**/*.apk

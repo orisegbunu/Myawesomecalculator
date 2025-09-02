@@ -1,15 +1,24 @@
 workflows:
-  android-workflow:
-    name: Android APK Build
+  expo-workflow:
+    name: Expo Android Build
     environment:
-      groups:
-        - default
+      node: 18
+      npm: false
+      yarn: true
     scripts:
       - name: Install dependencies
         script: |
           yarn install
-      - name: Build APK
+      - name: Prebuild Expo (generate native projects)
         script: |
-          expo export --platform android
+          npx expo prebuild --platform android
+      - name: Build Android APK
+        script: |
+          cd android
+          ./gradlew assembleRelease
     artifacts:
-      - build/**/*.apk
+      - android/app/build/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - your@email.com

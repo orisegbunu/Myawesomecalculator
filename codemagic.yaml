@@ -3,36 +3,38 @@ workflows:
     name: Expo Calculator Workflow
     max_build_duration: 60
     environment:
-      flutter: stable
-      node: 18.17.1
-      npm: 9.8.1
       vars:
-        NODE_ENV: "production"
-      # If you need Android SDK explicitly:
+        EXPO_USERNAME: Encrypted: your_encrypted_username
+        EXPO_PASSWORD: Encrypted: your_encrypted_password
+      node: 18.16.0
+      flutter: none
+      cocoapods: default
+      xcode: none
+      java: default
       android:
-        components:
-          - tools
-          - platform-tools
-          - build-tools-33.0.0
-          - android-33
+        gradle: default
+        cache:
+          - ~/.gradle
+          - ~/.android/build-cache
+          - ~/.npm
     scripts:
       - name: Install dependencies
-        script: |
-          echo "Installing npm dependencies..."
-          npm install --legacy-peer-deps
-      - name: Prebuild Expo
-        script: |
-          echo "Running Expo prebuild..."
-          npx expo prebuild
-      - name: Build Android APK
-        script: |
-          echo "Building Android APK..."
-          npx eas build --platform android --profile preview --non-interactive
+        script: npm install --legacy-peer-deps
+      - name: Start build
+        script: npx expo prebuild
+      - name: Build APK
+        script: npx eas build --platform android --profile preview
     artifacts:
-      - build/**/android/*.apk
+      - build/android/*.apk
+      - build/android/app-release.apk
+    cache:
+      paths:
+        - ~/.gradle
+        - ~/.android/build-cache
+        - ~/.npm
     publishing:
       email:
         recipients:
-          - "youremail@example.com"
+          - your-email@example.com
         notify_on_success: true
         notify_on_failure: true

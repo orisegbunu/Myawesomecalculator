@@ -3,8 +3,7 @@ workflows:
     name: Expo Android Build
     environment:
       node: 18
-      npm: false
-      yarn: true
+      package_manager: yarn
     scripts:
       - name: Install dependencies
         script: |

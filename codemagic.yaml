@@ -4,7 +4,7 @@ workflows:
     max_build_duration: 60
     environment:
       vars:
-        EXPO_TOKEN: Encrypted: your_encrypted_expo_token
+        EXPO_TOKEN: "Encrypted: your_encrypted_expo_token"
       node: latest
       flutter: stable
       cocoapods: default

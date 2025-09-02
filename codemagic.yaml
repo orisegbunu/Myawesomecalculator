@@ -9,13 +9,13 @@ workflows:
     scripts:
       - name: Install dependencies
         script: |
-          npm install
+          npm install --legacy-peer-deps
       - name: Build APK
         script: |
           npx expo prebuild
           npx eas build --platform android
     artifacts:
       - build/**/*.apk
+      - android/app/build/outputs/**/*.apk   # <-- added explicit Android artifact path
     publishing:
-      expo:
-        workflow: managed
+      expo: {}

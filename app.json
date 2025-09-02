@@ -1,29 +1,31 @@
 {
   "expo": {
     "name": "Myawesomecalculator",
-    "slug": "Myawesomecalculator",
+    "slug": "myawesomecalculator",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#222222"
     },
-    "ios": {
-      "supportsTablet": true
-    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "platforms": ["android", "ios"],
     "android": {
+      "package": "com.orisegbunu.myawesomecalculator",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
+        "backgroundColor": "#222222"
+      }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "ios": {
+      "bundleIdentifier": "com.orisegbunu.myawesomecalculator",
+      "buildNumber": "1.0.0"
     }
   }
 }

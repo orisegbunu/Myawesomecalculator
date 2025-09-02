@@ -5,7 +5,7 @@ import Button from './components/button';
 
 export default function App() {
   const [input, setInput] = useState('');
-  
+
   const handlePress = (value) => {
     if (value === '=') {
       try {
@@ -21,10 +21,10 @@ export default function App() {
   };
 
   const buttons = [
-    ['7','8','9','/'],
-    ['4','5','6','*'],
-    ['1','2','3','-'],
-    ['0','.','=','+'],
+    ['7', '8', '9', '/'],
+    ['4', '5', '6', '*'],
+    ['1', '2', '3', '-'],
+    ['0', '.', '=', '+'],
     ['C']
   ];
 
@@ -49,9 +49,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#222',
     justifyContent: 'center',
+    padding: 10,
   },
   buttonContainer: {
-    padding: 10,
+    marginTop: 20,
   },
   row: {
     flexDirection: 'row',

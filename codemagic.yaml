@@ -1,23 +1,32 @@
 workflows:
   expo-workflow:
-    name: Expo Android Build
+    name: Expo Workflow
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    
     environment:
-      node: 18
-      package_manager: yarn
+      node: 20.11.1   # ✅ Node.js version
+      expo_token: $EXPO_TOKEN
+      vars:
+        EXPO_ANDROID_KEYSTORE_PASSWORD: $EXPO_ANDROID_KEYSTORE_PASSWORD
+        EXPO_ANDROID_KEY_ALIAS_PASSWORD: $EXPO_ANDROID_KEY_ALIAS_PASSWORD
+        EXPO_ANDROID_KEY_ALIAS: $EXPO_ANDROID_KEY_ALIAS
+    
     scripts:
       - name: Install dependencies
         script: |
-          yarn install
-      - name: Prebuild Expo (generate native projects)
-        script: |
-          npx expo prebuild --platform android
+          npm install
+
       - name: Build Android APK
         script: |
-          cd android
-          ./gradlew assembleRelease
+          npx expo export --platform android
+          npx expo build:android -t apk
+
+      # If you also want iOS builds, uncomment below
+      # - name: Build iOS IPA
+      #   script: |
+      #     npx expo build:ios -t archive
+
     artifacts:
-      - android/app/build/outputs/**/*.apk
-    publishing:
-      email:
-        recipients:
-          - your@email.com
+      - android/*.apk
+      - ios/*.ipa

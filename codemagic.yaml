@@ -4,8 +4,8 @@ workflows:
     max_build_duration: 60
     environment:
       vars:
-        EXPO_USERNAME: "encrypted:your_encrypted_username"
-        EXPO_PASSWORD: "encrypted:your_encrypted_password"
+        EXPO_USERNAME: "encrypted:YOUR_ENCRYPTED_USERNAME"
+        EXPO_PASSWORD: "encrypted:YOUR_ENCRYPTED_PASSWORD"
     scripts:
       - name: Install dependencies
         script: |
@@ -16,6 +16,3 @@ workflows:
           npx eas build --platform android
     artifacts:
       - build/**/*.apk
-      - android/app/build/outputs/**/*.apk   # <-- added explicit Android artifact path
-    publishing:
-      expo: {}

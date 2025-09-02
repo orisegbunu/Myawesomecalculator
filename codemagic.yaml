@@ -1,18 +1,25 @@
 workflows:
-  my_awesome_app_workflow:
-    name: My Awesome Calculator Workflow
+  android-build:
+    name: Android APK Build
     max_build_duration: 60
     environment:
       vars:
-        EXPO_USERNAME: "encrypted:YOUR_ENCRYPTED_USERNAME"
-        EXPO_PASSWORD: "encrypted:YOUR_ENCRYPTED_PASSWORD"
+        EXPO_TOKEN: Encrypted: your_encrypted_expo_token
+      node: latest
+      flutter: stable
+      cocoapods: default
+      ruby: default
     scripts:
-      - name: Install dependencies
+      - name: Install Dependencies
         script: |
-          npm install --legacy-peer-deps
+          npm install
+          npm install -g expo-cli
+      - name: Prebuild Android
+        script: |
+          expo prebuild --platform android
       - name: Build APK
         script: |
-          npx expo prebuild
-          npx eas build --platform android
+          eas build --platform android --profile production
     artifacts:
-      - build/**/*.apk
+      - build/android/*.apk
+

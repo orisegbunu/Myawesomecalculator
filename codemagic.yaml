@@ -1,40 +1,21 @@
 workflows:
-  expo-calculator-workflow:
-    name: Expo Calculator Workflow
+  my_awesome_app_workflow:
+    name: My Awesome Calculator Workflow
     max_build_duration: 60
     environment:
       vars:
-        EXPO_USERNAME: Encrypted: your_encrypted_username
-        EXPO_PASSWORD: Encrypted: your_encrypted_password
-      node: 18.16.0
-      flutter: none
-      cocoapods: default
-      xcode: none
-      java: default
-      android:
-        gradle: default
-        cache:
-          - ~/.gradle
-          - ~/.android/build-cache
-          - ~/.npm
+        EXPO_USERNAME: "encrypted:your_encrypted_username"
+        EXPO_PASSWORD: "encrypted:your_encrypted_password"
     scripts:
       - name: Install dependencies
-        script: npm install --legacy-peer-deps
-      - name: Start build
-        script: npx expo prebuild
+        script: |
+          npm install
       - name: Build APK
-        script: npx eas build --platform android --profile preview
+        script: |
+          npx expo prebuild
+          npx eas build --platform android
     artifacts:
-      - build/android/*.apk
-      - build/android/app-release.apk
-    cache:
-      paths:
-        - ~/.gradle
-        - ~/.android/build-cache
-        - ~/.npm
+      - build/**/*.apk
     publishing:
-      email:
-        recipients:
-          - your-email@example.com
-        notify_on_success: true
-        notify_on_failure: true
+      expo:
+        workflow: managed

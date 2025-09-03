@@ -1,16 +1,20 @@
+triggers:
+  - type: push
+    branch: main
+
 workflows:
-  expo-workflow:
-    name: Expo Build Workflow
+  expo-android-workflow:
+    name: Expo Android Workflow
     environment:
       vars:
         EXPO_TOKEN: $EXPO_TOKEN
-        ANDROID_KEYSTORE: $ANDROID_KEYSTORE
-        ANDROID_KEYSTORE_PASSWORD: $ANDROID_KEYSTORE_PASSWORD
-        ANDROID_KEY_ALIAS: $ANDROID_KEY_ALIAS
-        ANDROID_KEY_PASSWORD: $ANDROID_KEY_PASSWORD
+        KEYSTORE_BASE64: $KEYSTORE_BASE64
+        KEYSTORE_PASSWORD: $KEYSTORE_PASSWORD
+        KEY_ALIAS: $KEY_ALIAS
+        KEY_PASSWORD: $KEY_PASSWORD
     scripts:
       - name: Install dependencies
-        script: npm install
+        script: yarn install
       - name: Login to Expo
         script: npx expo login --token $EXPO_TOKEN
       - name: Build Android app
